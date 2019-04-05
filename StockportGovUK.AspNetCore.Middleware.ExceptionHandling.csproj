@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>StockportGovUK.AspNetCore.Middleware.ExceptionHandling</PackageId>
+    <Title>Stockport.gov.uk's generic exception handling middleware</Title>
+    <Version>0.1.0</Version>
+    <Authors>Colin Lees, Jon Chiles, Jon Hadley</Authors>
+    <Company>Stockport Council</Company>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="licenses\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+  </ItemGroup>
+</Project>
