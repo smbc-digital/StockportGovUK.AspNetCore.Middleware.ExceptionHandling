@@ -2,7 +2,7 @@
   <PropertyGroup>
     <PackageId>StockportGovUK.AspNetCore.Middleware.ExceptionHandling</PackageId>
     <Title>Stockport.gov.uk's generic exception handling middleware</Title>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Authors>Colin Lees, Jon Chiles, Jon Hadley</Authors>
     <Company>Stockport Council</Company>
     <TargetFramework>netcoreapp2.2</TargetFramework>
