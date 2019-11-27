@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -9,13 +10,16 @@ namespace StockportGovUK.AspNetCore.Middleware
 {
     public class ExceptionHandling
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionHandling> _logger;
+        protected readonly RequestDelegate _next;
+        protected readonly ILogger<ExceptionHandling> _logger;
 
-        public ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger)
+        protected readonly IConfiguration _configuration;
+
+        public ExceptionHandling(RequestDelegate next, ILogger<ExceptionHandling> logger, IConfiguration configuration)
         {
             _next = next;
             _logger = logger;
+            _configuration = configuration;
         }
 
         public async Task Invoke(HttpContext context)
@@ -26,14 +30,13 @@ namespace StockportGovUK.AspNetCore.Middleware
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                _logger.LogError(ex, ex.Message);
+                await HandleResponse(context, ex);
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        protected virtual async Task HandleResponse(HttpContext context, Exception exception)
         {
-            _logger.LogError(exception, exception.Message);
-
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
