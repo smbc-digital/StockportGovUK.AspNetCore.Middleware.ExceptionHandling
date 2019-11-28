@@ -19,6 +19,7 @@ namespace StockportGovUK.AspNetCore.Middleware.App
 
             if(string.IsNullOrEmpty(errorRoute))
             {
+                context.Response.StatusCode = 500;
                 context.Response.Redirect("/Error");
             }
 
