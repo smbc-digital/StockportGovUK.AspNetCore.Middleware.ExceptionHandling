@@ -13,13 +13,13 @@ namespace StockportGovUK.AspNetCore.Middleware.App
         {
         }
 
-        protected override async Task HandleResponse(HttpContext context, Exception exception)
+        protected override async Task HandleResponse(HttpContext context, Exception exception, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
         {
             var errorRoute = _configuration.GetValue<string>("ErrorRoute");
 
             if(string.IsNullOrEmpty(errorRoute))
             {
-                context.Response.StatusCode = 500;
+                context.Response.StatusCode = (int)statusCode;
                 context.Response.Redirect("/Error");
             }
 

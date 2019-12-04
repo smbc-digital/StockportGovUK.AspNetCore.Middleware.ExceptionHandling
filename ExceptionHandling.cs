@@ -35,10 +35,10 @@ namespace StockportGovUK.AspNetCore.Middleware
             }
         }
 
-        protected virtual async Task HandleResponse(HttpContext context, Exception exception)
+        protected virtual async Task HandleResponse(HttpContext context, Exception exception, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int)statusCode;
 
             await context.Response.WriteAsync(JsonConvert.SerializeObject(new 
             {
