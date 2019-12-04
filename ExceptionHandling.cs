@@ -22,7 +22,7 @@ namespace StockportGovUK.AspNetCore.Middleware
             _configuration = configuration;
         }
 
-        public async Task Invoke(HttpContext context)
+        public virtual async Task Invoke(HttpContext context)
         {
             try
             {
