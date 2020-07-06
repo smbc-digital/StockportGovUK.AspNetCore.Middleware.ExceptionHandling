@@ -1,10 +1,10 @@
 using System;
 using System.Net;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace StockportGovUK.AspNetCore.Middleware
 {
@@ -19,10 +19,10 @@ namespace StockportGovUK.AspNetCore.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
 
-            await context.Response.WriteAsync(JsonSerializer.Serialize(new 
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(new 
             {
-                Message = exception.Message,
-                InnerException = exception.InnerException
+                exception.Message,
+                exception.InnerException
             }));
         }
     }
